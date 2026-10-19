@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Manrope Variable', system-ui, sans-serif;
+  --color-bg: #0e0e13;
+  --color-surface: #17171f;
+  --color-surface-2: #1f1f2a;
+  --color-line: #2b2b39;
+  --color-ink: #ececf3;
+  --color-muted: #8a8a9d;
+  --color-accent: #8b6cff;
+  --color-accent-2: #ff6ca8;
+  --color-danger: #ff5d6c;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Gradiente usado no checkbox, no botão flutuante e no logo */
+.bg-brand {
+  background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+}
+.text-brand {
+  background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Botões de editar/excluir: aparecem no hover (ou foco por teclado).
+   Em telas de toque (sem hover) ficam sempre visíveis. */
+.task-actions {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.task-item:hover .task-actions,
+.task-item:focus-within .task-actions {
+  opacity: 1;
+}
+@media (hover: none) {
+  .task-actions {
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.modal-card {
+  animation: pop 0.16s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal-card {
+    animation: none;
+  }
+}
